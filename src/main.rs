@@ -102,7 +102,14 @@ fn run_command(command: &str, child: unistd::Pid) {
 }
 
 fn main() {
-    let path: &CStr = &CString::new("/home/dropa/sample_db_rust/target/debug/sample_db_rust").unwrap();
+    let args: Vec<String> = std::env::args().collect();
+    if args.len() != 2 {
+        println!("Usage: cargo run <program_path>");
+        return;
+    }
+    let program_path = &args[1];
+    let path: &CStr = &CString::new(program_path.clone()).unwrap();
+
     match unsafe { fork() }.expect("Failed to fork") {
         ForkResult::Parent { child } => {
             println!("Child pid: {}", child);

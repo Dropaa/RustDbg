@@ -4,7 +4,6 @@ use std::collections::HashMap;
 
 static mut BREAKPOINTS: Option<HashMap<u64, u8>> = None;
 
-// Function to set a breakpoint at the specified address
 pub fn set_breakpoint(child: unistd::Pid, address: u64) -> Result<(), nix::Error> {
     let original_byte = ptrace::read(child, address as nix::sys::ptrace::AddressType)?;
 
@@ -12,7 +11,7 @@ pub fn set_breakpoint(child: unistd::Pid, address: u64) -> Result<(), nix::Error
         if let Some(ref mut breakpoints) = BREAKPOINTS {
             breakpoints.insert(address, original_byte as u8);
         } else {
-            let mut breakpoints = HashMap::<u64, u8>::new(); // Specify types for HashMap
+            let mut breakpoints = HashMap::<u64, u8>::new();
             breakpoints.insert(address, original_byte as u8);
             BREAKPOINTS = Some(breakpoints);
         }
