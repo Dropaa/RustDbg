@@ -8,25 +8,42 @@ mod working;
 use crate::working::prettier;
 use crate::working::show_registers;
 use crate::working::help_commands;
+use crate::working::set_breakpoint;
 
 fn run_command(command: &str, child: unistd::Pid) {
     let args: Vec<&str> = command.split_whitespace().collect();
     match args.get(0) {
         Some(&"c" | &"continue") => {
             println!("Continuing execution...");
-            ptrace::cont(child, None).expect("Failed to continue execution");
-            prettier(child);
+            if let Err(err) = ptrace::cont(child, None) {
+                println!("Failed to continue execution: {:?}", err);
+            } else {
+                prettier(child);
+            }
         }
         Some(&"s" | &"syscall") => {
-            let _ = waitpid(child, None).expect("Failed to wait");
-            let registers_syscall = ptrace::getregs(child).expect("Could not get child's registers");
+            if let Err(err) = waitpid(child, None) {
+                println!("Failed to wait: {:?}", err);
+                return;
+            }
+            let registers_syscall = match ptrace::getregs(child) {
+                Ok(registers) => registers,
+                Err(err) => {
+                    println!("Could not get child's registers: {:?}", err);
+                    return;
+                }
+            };
             let _syscall_name = syscall::syscall_name(registers_syscall.orig_rax);
             println!("Entering {} ({}) syscall", _syscall_name, registers_syscall.orig_rax);
-            ptrace::syscall(child, None).expect("Failed to use PTRACE_SYSCALL");
+            if let Err(err) = ptrace::syscall(child, None) {
+                println!("Failed to use PTRACE_SYSCALL: {:?}", err);
+            }
         }
         Some(&"n" | &"next") => {
             println!("Taking a single step...");
-            ptrace::step(child, None).expect("Failed to continue execution");
+            if let Err(err) = ptrace::step(child, None) {
+                println!("Failed to continue execution: {:?}", err);
+            }
         }
         Some(&"r" | &"registers") => {
             println!("Showing register states...");
@@ -48,6 +65,26 @@ fn run_command(command: &str, child: unistd::Pid) {
                     match ptrace::read(child, address as nix::sys::ptrace::AddressType) {
                         Ok(value) => println!("{:#018x}", value),
                         Err(_) => println!("Not able to read the content of this address"),
+                    }
+                }
+                Err(_) => println!("Invalid address format"),
+            }
+        }
+        Some(&"b" | &"breakpoint") => {
+            if args.len() != 2 {
+                println!("Usage: b <address>");
+                return;
+            }
+            let hex_address = args[1];
+            if !hex_address.starts_with("0x") {
+                println!("Your address should start with 0x !");
+                return;
+            }
+            let hex_address = &hex_address[2..];
+            match u64::from_str_radix(hex_address, 16) {
+                Ok(address) => {
+                    if let Err(err) = set_breakpoint(child, address) {
+                        println!("Failed to set breakpoint: {:?}", err);
                     }
                 }
                 Err(_) => println!("Invalid address format"),
