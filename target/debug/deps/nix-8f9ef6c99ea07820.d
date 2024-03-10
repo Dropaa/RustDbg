@@ -1,0 +1,13 @@
+/home/dropa/Bureau/dbg_rust/target/debug/deps/libnix-8f9ef6c99ea07820.rmeta: /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/lib.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/macros.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/errno.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/fcntl.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/sys/mod.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/sys/signal.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/sys/sysinfo.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/sys/time.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/unistd.rs
+
+/home/dropa/Bureau/dbg_rust/target/debug/deps/nix-8f9ef6c99ea07820.d: /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/lib.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/macros.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/errno.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/fcntl.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/sys/mod.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/sys/signal.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/sys/sysinfo.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/sys/time.rs /home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/unistd.rs
+
+/home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/lib.rs:
+/home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/macros.rs:
+/home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/errno.rs:
+/home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/fcntl.rs:
+/home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/sys/mod.rs:
+/home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/sys/signal.rs:
+/home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/sys/sysinfo.rs:
+/home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/sys/time.rs:
+/home/dropa/.cargo/registry/src/index.crates.io-6f17d22bba15001f/nix-0.28.0/src/unistd.rs:

@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"mod":["prctl","ptrace","signal","sysinfo","time","wait"]};

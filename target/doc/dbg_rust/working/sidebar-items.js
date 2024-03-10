@@ -1,0 +1,1 @@
+window.SIDEBAR_ITEMS = {"fn":["handle_breakpoint","help_commands","prettier","set_breakpoint","show_registers"],"static":["BREAKPOINTS"]};

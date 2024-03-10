@@ -1,0 +1,47 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="generator" content="rustdoc"><meta name="description" content="Rust Debugger"><title>dbg_rust - Rust</title><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceSerif4-Regular-46f98efaafac5295.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Regular-018c141bf0843ffd.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/FiraSans-Medium-8f9a781e4970d388.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Regular-562dcc5011b6de7d.ttf.woff2"><link rel="preload" as="font" type="font/woff2" crossorigin href="../static.files/SourceCodePro-Semibold-d899c5a5c4aeb14a.ttf.woff2"><link rel="stylesheet" href="../static.files/normalize-76eba96aa4d2e634.css"><link rel="stylesheet" href="../static.files/rustdoc-ac92e1bbe349e143.css"><meta name="rustdoc-vars" data-root-path="../" data-static-root-path="../static.files/" data-current-crate="dbg_rust" data-themes="" data-resource-suffix="" data-rustdoc-version="1.76.0 (07dca489a 2024-02-04)" data-channel="1.76.0" data-search-js="search-2b6ce74ff89ae146.js" data-settings-js="settings-4313503d2e1961c2.js" ><script src="../static.files/storage-f2adc0d6ca4d09fb.js"></script><script defer src="../crates.js"></script><script defer src="../static.files/main-305769736d49e732.js"></script><noscript><link rel="stylesheet" href="../static.files/noscript-feafe1bb7466e4bd.css"></noscript><link rel="alternate icon" type="image/png" href="../static.files/favicon-16x16-8b506e7a72182f1c.png"><link rel="alternate icon" type="image/png" href="../static.files/favicon-32x32-422f7d1d52889060.png"><link rel="icon" type="image/svg+xml" href="../static.files/favicon-2c020d218678b618.svg"></head><body class="rustdoc mod crate"><!--[if lte IE 11]><div class="warning">This old browser is unsupported and will most likely display funky things.</div><![endif]--><nav class="mobile-topbar"><button class="sidebar-menu-toggle">&#9776;</button></nav><nav class="sidebar"><div class="sidebar-crate"><h2><a href="../dbg_rust/index.html">dbg_rust</a><span class="version">0.1.0</span></h2></div><div class="sidebar-elems"><ul class="block">
+            <li><a id="all-types" href="all.html">All Items</a></li></ul><section><ul class="block"><li><a href="#modules">Modules</a></li><li><a href="#functions">Functions</a></li></ul></section></div></nav><div class="sidebar-resizer"></div>
+    <main><div class="width-limiter"><nav class="sub"><form class="search-form"><span></span><div id="sidebar-button" tabindex="-1"><a href="../dbg_rust/all.html" title="show sidebar"></a></div><input class="search-input" name="search" aria-label="Run search in the documentation" autocomplete="off" spellcheck="false" placeholder="Click or press ‘S’ to search, ‘?’ for more options…" type="search"><div id="help-button" tabindex="-1"><a href="../help.html" title="help">?</a></div><div id="settings-menu" tabindex="-1"><a href="../settings.html" title="settings"><img width="22" height="22" alt="Change settings" src="../static.files/wheel-7b819b6101059cd0.svg"></a></div></form></nav><section id="main-content" class="content"><div class="main-heading"><h1>Crate <a class="mod" href="#">dbg_rust</a><button id="copy-path" title="Copy item path to clipboard"><img src="../static.files/clipboard-7571035ce49a181d.svg" width="19" height="18" alt="Copy item path"></button></h1><span class="out-of-band"><a class="src" href="../src/dbg_rust/main.rs.html#1-222">source</a> · <button id="toggle-all-docs" title="collapse all docs">[<span>&#x2212;</span>]</button></span></div><details class="toggle top-doc" open><summary class="hideme"><span>Expand description</span></summary><div class="docblock"><h2 id="rust-debugger"><a href="#rust-debugger">Rust Debugger</a></h2>
+<p>This debugger is designed to trace and debug programs written in Rust. It provides basic debugging functionalities
+such as stepping through code, examining register states, viewing memory contents, setting breakpoints, and more.</p>
+<h3 id="usage"><a href="#usage">Usage</a></h3>
+<p>To use the debugger, simply run it with the path to the program you want to debug as a command-line argument:</p>
+<div class="example-wrap"><pre class="language-sh"><code>cargo run &lt;program_path&gt;
+</code></pre></div>
+<p>Once the debugger is running, you’ll be prompted with a debug console (rustdbg&gt;). You can input various commands
+to control the debugger’s behavior.</p>
+<h3 id="commands"><a href="#commands">Commands</a></h3>
+<p>The following commands are supported:</p>
+<ul>
+<li><code>c</code> or <code>continue</code>: Continue program execution.</li>
+<li><code>s</code> or <code>syscall</code>: Step into the next system call.</li>
+<li><code>n</code> or <code>next</code>: Execute the next line of code.</li>
+<li><code>r</code> or <code>registers</code>: Display register states.</li>
+<li><code>m &lt;address&gt;</code> or <code>memory &lt;address&gt;</code>: View the memory contents at a specified address.</li>
+<li><code>b &lt;address&gt;</code> or <code>breakpoint &lt;address&gt;</code>: Set a breakpoint at a specified address.</li>
+<li><code>h</code> or <code>help</code>: Display help information.</li>
+<li><code>q</code> or <code>quit</code>: Exit the debugger.</li>
+</ul>
+<h3 id="example"><a href="#example">Example</a></h3><div class="example-wrap"><pre class="language-sh"><code>$ cargo run /path/to/program
+Child pid: 1234
+rustdbg&gt; c
+Continuing execution...
+rustdbg&gt;
+</code></pre></div><h3 id="testing"><a href="#testing">Testing</a></h3>
+<p>Unit tests are provided to ensure the correctness of debugger functionalities. Run the tests using:</p>
+<div class="example-wrap"><pre class="language-sh"><code>cargo test
+</code></pre></div><h3 id="modules"><a href="#modules">Modules</a></h3>
+<ul>
+<li><code>syscall</code>: Provides utilities to work with system calls.</li>
+<li><code>working</code>: Contains various functions for debugger operations.</li>
+</ul>
+<h3 id="note"><a href="#note">Note</a></h3>
+<p>This debugger relies on the <code>nix</code> crate for system-level operations and process management.</p>
+<h3 id="safety"><a href="#safety">Safety</a></h3>
+<p>This debugger involves low-level operations and interacts with system resources. Care must be taken while using it
+to avoid unintended consequences or system instability.</p>
+<h3 id="authors"><a href="#authors">Authors</a></h3>
+<ul>
+<li>Ryan HENNOU</li>
+<li>Aurelien KRIEF</li>
+</ul>
+</div></details><h2 id="modules-1" class="section-header"><a href="#modules-1">Modules</a></h2><ul class="item-table"><li><div class="item-name"><a class="mod" href="syscall/index.html" title="mod dbg_rust::syscall">syscall</a><span title="Restricted Visibility">&nbsp;🔒</span> </div></li><li><div class="item-name"><a class="mod" href="working/index.html" title="mod dbg_rust::working">working</a><span title="Restricted Visibility">&nbsp;🔒</span> </div></li></ul><h2 id="functions" class="section-header"><a href="#functions">Functions</a></h2><ul class="item-table"><li><div class="item-name"><a class="fn" href="fn.main.html" title="fn dbg_rust::main">main</a><span title="Restricted Visibility">&nbsp;🔒</span> </div><div class="desc docblock-short">Entry point of the debugger application.</div></li><li><div class="item-name"><a class="fn" href="fn.run_command.html" title="fn dbg_rust::run_command">run_command</a><span title="Restricted Visibility">&nbsp;🔒</span> </div><div class="desc docblock-short">Executes the specified command in the debugger.</div></li></ul></section></div></main></body></html>
