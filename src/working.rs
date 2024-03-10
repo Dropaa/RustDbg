@@ -4,6 +4,23 @@ use std::collections::HashMap;
 
 static mut BREAKPOINTS: Option<HashMap<u64, u8>> = None;
 
+
+
+/// Set a breakpoint at the specified memory address in the debugged process.
+///
+/// # Arguments
+///
+/// * `child` - The process ID (Pid) of the child being debugged.
+/// * `address` - The memory address where the breakpoint is to be set.
+///
+/// # Errors
+///
+/// Returns an error if setting the breakpoint fails.
+///
+/// # Safety
+///
+/// This function involves modifying the debugged process's memory and relies on unsafe operations.
+///
 pub fn set_breakpoint(child: unistd::Pid, address: u64) -> Result<(), nix::Error> {
     let original_byte = ptrace::read(child, address as nix::sys::ptrace::AddressType)?;
 
@@ -23,6 +40,14 @@ pub fn set_breakpoint(child: unistd::Pid, address: u64) -> Result<(), nix::Error
     Ok(())
 }
 
+
+/// Handle a breakpoint hit at the specified address in the debugged process.
+///
+/// # Arguments
+///
+/// * `child` - The process ID (Pid) of the child being debugged.
+/// * `address` - The memory address where the breakpoint was hit.
+///
 pub fn handle_breakpoint(child: unistd::Pid, address: u64) {
     unsafe {
         if let Some(ref mut breakpoints) = BREAKPOINTS {
@@ -45,6 +70,21 @@ pub fn handle_breakpoint(child: unistd::Pid, address: u64) {
     }
     println!("Hit unknown breakpoint at address {:#x}", address);
 }
+
+
+/// Handle process stopping events and print information when a SIGTRAP signal is received.
+///
+/// This function continuously waits for the child process to stop and checks if it's due to a SIGTRAP signal,
+/// indicating a breakpoint hit. When a SIGTRAP is detected, it prints information about it and then breaks
+/// out of the loop.
+///
+/// # Arguments
+///
+/// * `child` - The process ID (Pid) of the child being debugged.
+///
+/// # Panics
+///
+/// This function panics if it fails to get the register states of the child process.
 
 pub fn prettier(child: unistd::Pid) {
     loop {
@@ -72,6 +112,12 @@ pub fn prettier(child: unistd::Pid) {
     }
 }
 
+/// Print register states of the debugged process.
+///
+/// # Arguments
+///
+/// * `child` - The process ID (Pid) of the child being debugged.
+///
 pub fn show_registers(child: unistd::Pid) {
     let regs = ptrace::getregs(child).expect("Failed to get registers");
     println!("Registers:");
@@ -94,6 +140,7 @@ pub fn show_registers(child: unistd::Pid) {
     println!("  r15: 0x{:x}", regs.r15);
 }
 
+/// Print available debugger commands and their descriptions.
 pub fn help_commands() {
     println!("Available commands:");
     println!("  c or continue: Continue the process until completion (or the next breakpoint)");

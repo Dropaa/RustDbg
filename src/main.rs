@@ -1,3 +1,71 @@
+//! # Rust Debugger
+//!
+//! This debugger is designed to trace and debug programs written in Rust. It provides basic debugging functionalities
+//! such as stepping through code, examining register states, viewing memory contents, setting breakpoints, and more.
+//!
+//! ## Usage
+//!
+//! To use the debugger, simply run it with the path to the program you want to debug as a command-line argument:
+//!
+//! ```sh
+//! cargo run <program_path>
+//! ```
+//!
+//! Once the debugger is running, you'll be prompted with a debug console (rustdbg>). You can input various commands
+//! to control the debugger's behavior.
+//!
+//! ## Commands
+//!
+//! The following commands are supported:
+//!
+//! - `c` or `continue`: Continue program execution.
+//! - `s` or `syscall`: Step into the next system call.
+//! - `n` or `next`: Execute the next line of code.
+//! - `r` or `registers`: Display register states.
+//! - `m <address>` or `memory <address>`: View the memory contents at a specified address.
+//! - `b <address>` or `breakpoint <address>`: Set a breakpoint at a specified address.
+//! - `h` or `help`: Display help information.
+//! - `q` or `quit`: Exit the debugger.
+//!
+//! ## Example
+//!
+//! ```sh
+//! $ cargo run /path/to/program
+//! Child pid: 1234
+//! rustdbg> c
+//! Continuing execution...
+//! rustdbg>
+//! ```
+//!
+//! ## Testing
+//!
+//! Unit tests are provided to ensure the correctness of debugger functionalities. Run the tests using:
+//!
+//! ```sh
+//! cargo test
+//! ```
+//!
+//! ## Modules
+//!
+//! - `syscall`: Provides utilities to work with system calls.
+//! - `working`: Contains various functions for debugger operations.
+//!
+//! ## Note
+//!
+//! This debugger relies on the `nix` crate for system-level operations and process management.
+//!
+//! ## Safety
+//!
+//! This debugger involves low-level operations and interacts with system resources. Care must be taken while using it
+//! to avoid unintended consequences or system instability.
+//!
+//! ## Authors
+//!
+//! - Ryan HENNOU
+//! - Aurelien KRIEF
+//! 
+//! 
+//! 
 use std::ffi::{CStr, CString};
 use std::io::{self, Write};
 use nix::sys::ptrace;
@@ -9,6 +77,21 @@ use crate::working::prettier;
 use crate::working::show_registers;
 use crate::working::help_commands;
 use crate::working::set_breakpoint;
+
+
+/// Executes the specified command in the debugger.
+///
+/// # Arguments
+///
+/// * `command` - A string slice representing the command to execute.
+/// * `child` - The process ID (Pid) of the child being debugged.
+///
+/// # Example
+///
+/// ```rust
+/// run_command("c", child_pid);
+/// ```
+///
 
 fn run_command(command: &str, child: unistd::Pid) {
     let args: Vec<&str> = command.split_whitespace().collect();
@@ -101,6 +184,8 @@ fn run_command(command: &str, child: unistd::Pid) {
     }
 }
 
+/// Entry point of the debugger application.
+
 fn main() {
     let args: Vec<String> = std::env::args().collect();
     if args.len() != 2 {
@@ -132,3 +217,6 @@ fn main() {
         }
     }
 }
+
+#[cfg(test)]
+mod test;

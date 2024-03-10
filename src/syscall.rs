@@ -1,3 +1,12 @@
+/// Get the name of the syscall based on its number.
+///
+/// # Arguments
+///
+/// * `syscall_num` - The syscall number.
+///
+/// # Returns
+///
+/// The name of the syscall as a static string.
 pub fn syscall_name(syscall_num: u64) -> &'static str {
     match syscall_num {
         0 => "read",
