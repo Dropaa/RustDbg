@@ -29,4 +29,4 @@ If you were continuing to work on this project, what might be a next thing you w
 > We really want to add the break instruction with function name. We couldn't get our head on it but it seems super fun to do.
 
 What surprised you? What did you learn?
-> What surprised us is how easy a debugger works. It was kinda obsucre for us but once you learn about the ptrace syscall and what it does, everything is no more magic but pure logic :')
+> What surprised us is how easily a debugger works. It was somewhat obscure to us at first, but once we learned about the ptrace syscall and its functionality, everything became less magical and more logical :')
